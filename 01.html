@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<style type="text/css">
+    *{margin:0px; padding:0px;}
+    body{font-size:12px;}
+    #demo1{width:600px; margin:10px auto;}
+    #BigImg{float:left; margin-right:10px; margin-top: 4px;}
+    .item{
+        width:200px;
+        line-height:5px;
+        box-sizing: border-box;
+        border:1px solid gray;
+        margin:3px 0px;
+        float:left;
+    }
+    .select{ border:1px solid red;}
+    .item img{vertical-align:middle; margin-right:10px;}
+
+</style>
+<body>
+<div id="demo1">
+    <img :src="imgBigUrl" id="BigImg"/>
+    <p>颜色选型</p>
+    <div v-for="(item,index) in Looplist" :class=['item',{'select':current==index}] @click="handleClick(index)">
+        <img :src="item.imgUrl"/>{{item.describe}}</div>
+</div>
+<script>
+    new Vue({
+        el:'#demo1',
+        data:{
+            current:0,
+            imgBigUrl:'img/blue-max.jpg',
+            Looplist:[{describe:'蓝色-迷你型',
+                imgUrl:'img/blue-min.jpg',
+                imgBigUrl:'img/blue-max.jpg'},
+                {describe:'粉色-迷你型',
+                    imgUrl:'img/pink-min.jpg',
+                    imgBigUrl:'img/pink-max.jpg'},
+                {describe:'白色-迷你型',
+                    imgUrl:'img/white-min.jpg',
+                    imgBigUrl:'img/white-max.jpg'},
+                {describe:'灰色-迷你型',
+                    imgUrl:'img/gray-min.jpg',
+                    imgBigUrl:'img/gray-max.jpg'}]
+        },
+        methods:{
+            handleClick:function(index){
+                this.current = index;
+                this.imgBigUrl = this.Looplist[index].imgBigUrl;
+            }
+        }
+    })
+</script>
+</body>
+</html>
